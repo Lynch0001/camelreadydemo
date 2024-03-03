@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: camelready-deployment
+  labels:
+    app: camelready
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: camelready
+  template:
+    metadata:
+      labels:
+        app: camelready
+    spec:
+      containers:
+        - name: camelready
+          image: docker.io/library/camelready:1.0
+          ports:
+            - containerPort: 8080
+              name: ready
+              protocol: TCP
+          readinessProbe:
+            httpGet:
+              port: ready
+              path: /ready
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            failureThreshold: 1000

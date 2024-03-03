@@ -1,0 +1,68 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+
+    <camelContext xmlns="http://camel.apache.org/schema/spring">
+
+        <route customId="true" id="route1">
+
+            <!-- Read files from input directory -->
+            <from uri="file://src/test/data/input" />
+
+            <!-- Transform content to UpperCase -->
+            <process ref="processor1" />
+
+            <!-- Write converted file content -->
+            <to uri="file://src/test/data/outputUpperCase" />
+
+            <!-- Transform content to LowerCase -->
+            <transform>
+                <simple>${body.toLowerCase()}</simple>
+            </transform>
+
+            <!-- Write converted file content -->
+            <to uri="file://src/test/data/outputLowerCase" />
+
+            <!-- Display process completion message on console -->
+            <transform>
+                <simple>.......... File content conversion completed ..........</simple>
+            </transform>
+            <to uri="stream:out" />
+
+        </route>
+        <route customId="true" id="route2">
+            <from uri="netty-http:http://0.0.0.0:8080/ready"/>
+            <process ref="processor2" />
+        </route>
+
+    </camelContext>
+
+    <bean id="processor1" class="com.example.camelreadydemo.processors.FileProcessor" />
+    <bean id="processor2" class="com.example.camelreadydemo.processors.ReadyProcessor" />
+
+</beans>
+
+
+
+
+
+
+
+<!--<route>-->
+<!--<from uri="direct:a"/>-->
+<!--<choice>-->
+<!--    <when>-->
+<!--        <xpath>$foo = 'bar'</xpath>-->
+<!--        <to uri="direct:b"/>-->
+<!--    </when>-->
+<!--    <when>-->
+<!--        <xpath>$foo = 'cheese'</xpath>-->
+<!--        <to uri="direct:c"/>-->
+<!--    </when>-->
+<!--    <otherwise>-->
+<!--        <to uri="direct:d"/>-->
+<!--    </otherwise>-->
+<!--</choice>-->
+<!--</route>-->
