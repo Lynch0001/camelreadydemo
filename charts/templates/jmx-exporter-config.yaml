@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: jmx-exporter-config
+data:
+  config.yaml: |
+    startDelaySeconds: 0
+    ssl: false
+    lowercaseOutputName: false
+    lowercaseOutputLabelNames: false
+    rules:
+      - pattern: ".*"

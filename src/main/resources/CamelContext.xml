@@ -33,36 +33,12 @@
 
         </route>
         <route customId="true" id="route2">
-            <from uri="netty-http:http://0.0.0.0:8080/ready"/>
+            <from uri="netty-http:http://0.0.0.0:8888/ready"/>
             <process ref="processor2" />
         </route>
-
     </camelContext>
 
     <bean id="processor1" class="com.example.camelreadydemo.processors.FileProcessor" />
     <bean id="processor2" class="com.example.camelreadydemo.processors.ReadyProcessor" />
 
 </beans>
-
-
-
-
-
-
-
-<!--<route>-->
-<!--<from uri="direct:a"/>-->
-<!--<choice>-->
-<!--    <when>-->
-<!--        <xpath>$foo = 'bar'</xpath>-->
-<!--        <to uri="direct:b"/>-->
-<!--    </when>-->
-<!--    <when>-->
-<!--        <xpath>$foo = 'cheese'</xpath>-->
-<!--        <to uri="direct:c"/>-->
-<!--    </when>-->
-<!--    <otherwise>-->
-<!--        <to uri="direct:d"/>-->
-<!--    </otherwise>-->
-<!--</choice>-->
-<!--</route>-->

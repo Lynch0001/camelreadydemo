@@ -16,6 +16,8 @@ repositories {
 }
 
 dependencies {
+    implementation 'org.apache.camel:camel-management:3.20.2'
+    implementation 'org.apache.camel:camel-management-api:3.20.2'
     implementation 'org.apache.camel:camel-netty-http:3.20.2'
     implementation 'org.apache.camel:camel-stream:3.20.2'
     implementation 'org.apache.camel:camel-bean:3.20.2'

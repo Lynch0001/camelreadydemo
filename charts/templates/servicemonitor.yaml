@@ -1,0 +1,23 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: camel-ready-servicemonitor
+spec:
+  selector:
+    matchLabels:
+      app: camelready
+  namespaceSelector:
+    matchNames:
+      - default
+  endpoints:
+    - port: metrics
+      path: /metrics
+      interval: 15s
+  jobLabel: camel-ready-metrics
+  selector:
+    matchLabels:
+      app: camelready
+  namespaceSelector:
+    matchNames:
+      - default
+      

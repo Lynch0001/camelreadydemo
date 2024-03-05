@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: camel-metrics-service
+  labels:
+    app: camelready
+spec:
+  selector:
+    app: camelready
+  type: ClusterIP
+  ports:
+    - name: metrics
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
