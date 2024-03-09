@@ -5,12 +5,17 @@ metadata:
   labels:
     app: camelready
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: camelready
   template:
     metadata:
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/scheme: "http"
+        prometheus.io/port: "8080"
+        prometheus.io/path: "/metrics"
       labels:
         app: camelready
     spec:

@@ -2,12 +2,16 @@ apiVersion: v1
 kind: Service
 metadata:
   name: camel-metrics-service
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/scheme: "http"
+    prometheus.io/port: "8080"
+    prometheus.io/path: "/metrics"
   labels:
     app: camelready
 spec:
   selector:
     app: camelready
-  type: ClusterIP
   ports:
     - name: metrics
       protocol: TCP
